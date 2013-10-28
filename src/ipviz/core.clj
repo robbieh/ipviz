@@ -53,13 +53,11 @@
     (Math/toRadians (* h wedge))))
 
 (defn octgroup-to-radians [g] 
-  (println "octgroup: " g)
   (vec (map hex-to-radian g)))
 
 (defn radian-to-xy [d radius] [(* radius (Math/cos d)) (* radius (Math/sin d))])
 
 (defn radgroup-to-polygon [g radius]
-  (println "group: " g)
  (map radian-to-xy g (repeat radius))
   )
 
@@ -72,17 +70,20 @@
         wedge (/ 360 17) 
 ;        octgroup (map vec (clojure.string/split ip6))
         ip6polygons (doall (map radgroup-to-polygon (map octgroup-to-radians (map vec (clojure.string/split ip6  #":"))) (repeat radius)))
-        s (style :foreground fgcolor :width 10)
-        s2 (style :foreground fgcolor :background bgcolor :width 10)
-        s3 (style :foreground "red" :background bgcolor :width 10)
+        s1 (style :foreground "red" :background (color "darkred" 160))
+        s2 (style :foreground fgcolor :background bgcolor)
+        s3 (style :foreground "red" :background bgcolor)
+        s4 (style :foreground fgcolor :stroke (stroke :width 10))
+        firstone (first (first ip6polygons))
         ]
-    (println hints)
+    (println (conj firstone 10))
     (push gc 
           (translate gc center center)
-;         (rotate gc )
-          (draw gc (circle 0 0 radius) s)
-          ((partial draw gc) (apply polygon (first ip6polygons)) s3)
+          (rotate gc -90)
+          (draw gc (apply circle (conj firstone 50)) s1)
+          (draw gc (circle 0 0 radius) s4)
           (apply (partial draw gc) (interleave (doall (map (partial apply polygon) ip6polygons)) (repeat s2)))
+          ((partial draw gc) (apply polygon (first ip6polygons)) s1)
           )
     img)
 
