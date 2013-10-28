@@ -9,5 +9,5 @@ makes it much harder to distingush addresses, and to see when two addreses are t
 
 Suggestions for how to visualize an address are very welcome!
 
-![sample IP visualization](https://github.com/robbieh/ipviz/blob/master/doc/images/test.png "1234:5678:9abc:def0:2468:ac13:59bd:048b")
+![sample IP visualization](https://raw.github.com/robbieh/ipviz/master/doc/images/test.png "1234:5678:9abc:def0:2468:ac13:59bd:048b")
 
