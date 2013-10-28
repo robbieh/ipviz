@@ -76,7 +76,6 @@
         s4 (style :foreground fgcolor :stroke (stroke :width 10))
         firstone (first (first ip6polygons))
         ]
-    (println (conj firstone 10))
     (push gc 
           (translate gc center center)
           (rotate gc -90)
